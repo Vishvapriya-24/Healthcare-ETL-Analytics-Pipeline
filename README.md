@@ -30,12 +30,14 @@ Python · Pandas · NumPy · MySQL · SQL · Power BI
 Healthcare-ETL-Analytics-Pipeline
 │
 ├── data
-│   ├── healthcare_raw.csv          # source data + injected noise
+│   ├── healthcare_raw.csv          # source data
+|   ├── healthcare_noisy.csv        # noisy data          
 │   └── healthcare_cleaned.csv      # final cleaned output
 │
 ├── scripts
-│   ├── 01_inject_noise.py          # adds controlled synthetic data issues
-│   └── 02_clean_pipeline.py        # full cleaning + validation pipeline
+│   ├── inject_noise.py          # adds controlled synthetic data issues
+|   ├── validate_data.py                                # inspects the data
+│   └── clean_pipeline.py        # full cleaning + validation pipeline
 │
 ├── sql
 │   ├── schema.sql                  # MySQL table definition
@@ -43,13 +45,8 @@ Healthcare-ETL-Analytics-Pipeline
 │
 ├── powerbi
 │   └── Healthcare_Dashboard.pbix
-│
-├── reports
-│   └── data_quality_report.csv     # before/after issue log (see below)
-│
-├── screenshots
-│   ├── dashboard_page1.png
-│   └── dashboard_page2.png
+|   ├── dashboard_page1.png
+│   └── dashboard_page2.png   
 │
 ├── requirements.txt
 ├── README.md
@@ -93,18 +90,18 @@ Actual output from the pipeline, run on 55,500 source records:
 
 | Issue | Records Affected | Action Taken |
 |---|---|---|
-| Duplicate rows | 467 | Removed |
-| Missing Billing Amount | 554 | Imputed with column median |
-| Missing Medical Condition | 555 | Filled as "Unknown" |
-| Missing Insurance Provider | 555 | Filled as "Unknown" |
-| Inconsistent Gender casing | 4 | Standardized |
+| Duplicate rows | 422 | Removed |
+| Missing Billing Amount | 1665 | Imputed with column median |
+| Missing Medical Condition | 1665 | Filled as "Unknown" |
+| Missing Insurance Provider | 1664 | Filled as "Unknown" |
+| Inconsistent Gender casing | 1110 | Standardized |
 | Negative Billing Amount | 105 | Corrected to absolute value, flagged for review |
 | Invalid Age (<0 or >120) | 10 | Removed (not recoverable) |
 | Invalid Blood Type values | 15 | Set to "Unknown" |
 | Mixed date formats | 1,110 | Parsed and standardized to YYYY-MM-DD |
 | Billing Amount outliers (IQR) | 20 | Flagged for analyst review |
 
-**Result: 55,500 → 55,023 clean, validated records** (477 removed as unrecoverable; all other issues corrected or flagged rather than dropped, to preserve data where possible).
+**Result: 55,500 → 55,068 clean, validated records** (432 rows removed: 422 duplicates + 10 unrecoverable invalid-age rows).
 
 Full row-level log: [`reports/data_quality_report.csv`](reports/data_quality_report.csv)
 
@@ -123,8 +120,10 @@ Built in Power BI on the cleaned dataset:
 - Test Results breakdown with interactive filters
 
 ### Preview
-`screenshots/dashboard_page1.png`
-`screenshots/dashboard_page2.png`
+![dashboard1](https://github.com/Vishvapriya-24/Healthcare-ETL-Analytics-Pipeline/blob/c0a9a25c5beba31d0bbd960a7aacc268526c17ee/powerbi/Overall_Dashboard.png)
+
+![dashboard2](https://github.com/Vishvapriya-24/Healthcare-ETL-Analytics-Pipeline/blob/c0a9a25c5beba31d0bbd960a7aacc268526c17ee/powerbi/Detailed_Dashboard.png)
+
 
 ---
 
