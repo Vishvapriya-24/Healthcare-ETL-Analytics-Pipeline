@@ -120,9 +120,9 @@ Built in Power BI on the cleaned dataset:
 - Test Results breakdown with interactive filters
 
 ### Preview
-![dashboard1](https://github.com/Vishvapriya-24/Healthcare-ETL-Analytics-Pipeline/blob/c0a9a25c5beba31d0bbd960a7aacc268526c17ee/powerbi/Overall_Dashboard.png)
+![dashboard1](https://github.com/Vishvapriya-24/Healthcare-ETL-Analytics-Pipeline/blob/ba69daf01f421fc3eb8fe2fc1694f95a6f18d9b9/powerbi/Detailed_Dashboard.png)
 
-![dashboard2](https://github.com/Vishvapriya-24/Healthcare-ETL-Analytics-Pipeline/blob/c0a9a25c5beba31d0bbd960a7aacc268526c17ee/powerbi/Detailed_Dashboard.png)
+![dashboard2](https://github.com/Vishvapriya-24/Healthcare-ETL-Analytics-Pipeline/blob/ba69daf01f421fc3eb8fe2fc1694f95a6f18d9b9/powerbi/Overall_Dashboard.png)
 
 
 ---
